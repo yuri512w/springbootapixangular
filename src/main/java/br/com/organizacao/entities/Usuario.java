@@ -1,10 +1,13 @@
 package br.com.organizacao.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -14,39 +17,28 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "usuario")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+public class Usuario {
 
-public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCliente")
-	private Integer idCliente;
-	
+	@Column(name = "idusuario")
+	private Integer idUsuario;
+
 	@Column(name = "nome", length = 150, nullable = false)
 	private String nome;
-	
-	@Column(name = "cpf", length = 150, nullable = false)
-	private String cpf;
-	
-	@Column(name = "email", length = 150, nullable = false)
+
+	@Column(name = "email", length = 100, nullable = false, unique = true)
 	private String email;
-	
-	@Column(name = "endereco", length = 150, nullable = false)
-	private String endereco;
-	
-	@Column(name = "cep", length = 150, nullable = false)
-	private String cep;
-	
-	@Column(name = "numero", length = 150, nullable = false)
-	private String numero;
-	
-	@Column(name = "password", length = 150, nullable = false)
-	private String pasword;
-	
-	
+
+	@Column(name = "senha", length = 40, nullable = false)
+	private String senha;
+
+	@OneToMany(mappedBy = "usuario")
+	private List<Historico> historicos;
 }

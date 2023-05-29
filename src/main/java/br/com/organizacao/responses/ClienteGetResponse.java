@@ -11,6 +11,10 @@ public class ClienteGetResponse {
 	private String nome;
 	private String cpf;
 	private String email;
+	private String endereco;
+	private String cep;
+	private String numero;
+	private String pasword;
 
 
 }

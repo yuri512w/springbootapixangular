@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.organizacao.entities.Cliente;
-import br.com.organizacao.repositores.IClienteRepository;
+import br.com.organizacao.repositories.IClienteRepository;
 import br.com.organizacao.request.ClientePostRequest;
 import br.com.organizacao.request.ClientePutRequest;
 import br.com.organizacao.responses.ClienteGetResponse;
@@ -43,6 +43,10 @@ public class ClienteController {
 			cliente.setNome(request.getNome()) ;
 			cliente.setCpf(request.getCpf());
 			cliente.setEmail(request.getEmail());
+			cliente.setCep(request.getCep());
+			cliente.setEndereco(request.getEndereco());
+			cliente.setNumero(request.getNumero());
+			cliente.setPasword(request.getPasword());
 			clienteRepository.save(cliente);
 
 			return ResponseEntity
@@ -101,7 +105,11 @@ public class ClienteController {
 				response.setNome(cliente.getNome());
 				response.setCpf(cliente.getCpf());
 				response.setEmail(cliente.getEmail());
-				
+				response.setCep(cliente.getCep());
+				response.setEndereco(cliente.getEndereco());
+				response.setNumero(cliente.getNumero());
+				response.setPasword(cliente.getPasword());
+
 				return ResponseEntity
 						.status(HttpStatus.OK)
 						.body(response);
@@ -142,7 +150,7 @@ public class ClienteController {
 							.body("Erro: " + e.getMessage());
 				}
 			}
-			@ApiOperation("Serviço para atualização dos dados de um produto.")
+			@ApiOperation("Serviço para atualização dos dados de um cliente.")
 			@RequestMapping(value = ENDPOINT, method = RequestMethod.PUT)
 			@CrossOrigin
 			public ResponseEntity<String> put(@RequestBody ClientePutRequest request) {
@@ -164,12 +172,16 @@ public class ClienteController {
 						cliente.setNome(request.getNome());
 						cliente.setCpf(request.getCpf());
 						cliente.setEmail(request.getEmail());
+						cliente.setCep(request.getCep());
+						cliente.setEndereco(request.getEndereco());
+						cliente.setNumero(request.getNumero());
+						cliente.setPasword(request.getPasword());
 					
 						clienteRepository.save(cliente);
 						
 						return ResponseEntity
 								.status(HttpStatus.OK)
-								.body("Produto atualizado com sucesso.");
+								.body("Cliente atualizado com sucesso.");
 					}
 				}
 				catch(Exception e) {
